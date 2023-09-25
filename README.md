@@ -12,17 +12,8 @@ Welcome to the PC Parts API, a Django-based project that provides information ab
     DATABASE_PASS=pcpartspassword
     DATABASE_PORT=5432
     ```
-2. Install Poetry:
-
-        pip install poetry
-3. Install dependencies:
-
-        poetry install
-4. Activate virtual environment:
-
-        poetry shell
-
-5. Run Postgres locally:
+    
+2. Run Postgres locally:
 
         docker run -d \
             --name postgres-container \
@@ -30,6 +21,18 @@ Welcome to the PC Parts API, a Django-based project that provides information ab
             -e POSTGRES_PASSWORD=pcpartspassword \
             -p 5432:5432 \
             postgres
+
+3. Install Poetry:
+
+        pip install poetry
+4. Install dependencies:
+
+        poetry install
+5. Activate virtual environment:
+
+        poetry shell
+
+
 
 6. Apply migrations:
 
