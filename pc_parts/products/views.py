@@ -40,6 +40,7 @@ class BrandDetailAPIView(generics.RetrieveAPIView):
 brand_detail_view = BrandDetailAPIView.as_view()
 
 class CategoryListCreateAPIView(generics.ListCreateAPIView):
+    paginator = None
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
 

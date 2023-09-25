@@ -12,6 +12,11 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+import environ
+
+
+env = environ.Env()
+environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -52,6 +57,11 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
+ELASTICSEARCH_DSL={
+    'default': {
+        'hosts': 'localhost:9200'
+    },
+}
 ROOT_URLCONF = "pc_parts.urls"
 
 TEMPLATES = [
@@ -78,8 +88,12 @@ WSGI_APPLICATION = "pc_parts.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": env("DATABASE_NAME"),
+        "USER": env("DATABASE_USER"),
+        "PASSWORD": env("DATABASE_PASS"),
+        "HOST": env("DATABASE_HOST"),
+        "PORT": env("DATABASE_PORT"),
     }
 }
 
@@ -153,6 +167,17 @@ LOGGING = {
             "level": "ERROR",
             "class": "django.utils.log.AdminEmailHandler",
         },
+        # "elk": {
+        #     "level": "INFO",
+        #     "class": "logstash.TCPLogstashHandler",
+        #     "host": "192.168.0.106",
+        #     "port": "9200",
+        #     'version': 1, # Version of logstash event schema. Default value: 0 (for backward compatibility of the library)
+        #     'message_type': 'django',  # 'type' field in logstash message. Default value: 'logstash'.
+        #     'fqdn': False, # Fully qualified domain name. Default value: false.
+        #     'tags': ['django.request', 'django']
+            
+        # }
     },
     'root': {
         'handlers': ['console'],
@@ -165,12 +190,14 @@ LOGGING = {
         },
         "django.request": {
             "handlers": ["mail_admins"],
-            "level": "ERROR",
+            "level": "INFO",
             "propagate": False,
         },
 
     },
 }
+
+
 REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
     "PAGE_SIZE": 32
