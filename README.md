@@ -38,6 +38,9 @@ Welcome to the PC Parts API, a Django-based project that provides information ab
 
          python manage.py migrate
 
-7. Run the Development Server:
+7. To seed database:
+
+        python manage.py loaddata categories.json --app products.category
+8. Run the Development Server:
 
         python manage.py runserver
