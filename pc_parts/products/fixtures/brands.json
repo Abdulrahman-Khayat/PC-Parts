@@ -1,0 +1,14 @@
+[
+    {
+      "model": "products.brand",
+      "fields": {
+        "name": "testjj"
+      }
+    },
+    {
+        "model": "products.brand",
+        "fields": {
+          "name": "test2jjjj"
+        }
+      }
+  ]
