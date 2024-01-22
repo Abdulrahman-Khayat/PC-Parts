@@ -40,7 +40,7 @@ Welcome to the PC Parts API, a Django-based project that provides information ab
 
 7. To seed database:
 
-        python manage.py loaddata categories.json --app products.category
+        python manage.py loaddata categories brands --app products
 8. Run the Development Server:
 
         python manage.py runserver
